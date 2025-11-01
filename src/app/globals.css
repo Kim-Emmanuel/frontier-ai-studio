@@ -1,0 +1,649 @@
+@import "tailwindcss";
+
+/*
+  Theme variables are now controlled via html[data-theme="light"|"dark"].
+  We also include a small 'no-transition' class applied during initial theme set
+  to avoid flashes when hydrating on the client.
+*/
+
+:root {
+	--radius: 16px;
+	--radius-lg: 24px;
+	--accent: #0ea072;
+	/* Decorative grid settings (site-wide theme overlay) */
+	--grid-size: 100px;
+	/* fallback grid color; more specific values set per theme below */
+	--grid-color: rgba(14, 160, 114, 0.06);
+	--shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+	--shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.4);
+	--font-sans: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+	--font-mono: "JetBrains Mono Variable", "JetBrains Mono", "Fira Code",
+		"Consolas", monospace;
+	--font-display: "Clash Display Variable", "Clash Display", "Inter Variable",
+		sans-serif;
+}
+
+html[data-theme="light"] {
+	--bg: #e8f6ea;
+	--ink: #0f2017;
+	--muted: #385f49;
+	--subtle: #bfe4c5;
+	--pill: #d7f0da;
+	--pill-active: #0f2017;
+	--pill-ink: #0f2017;
+	--pill-active-ink: #ecfaef;
+	--btn: #0f2017;
+	--btn-ink: #ecfaef;
+	--btn-hover: #243a2e;
+	--card: #f5fbf6;
+	--shadow: var(--shadow-light);
+	--background: var(--bg);
+	--foreground: var(--ink);
+	/* Lighter, subtle grid for light theme */
+	--grid-color: rgba(14, 160, 114, 0.06);
+}
+
+html[data-theme="dark"] {
+	--bg: #0a1a0f;
+	--ink: #ecfaef;
+	--muted: #4a6b5a;
+	--subtle: #1a3323;
+	--pill: #1f3728;
+	--pill-active: #ecfaef;
+	--pill-ink: #ecfaef;
+	--pill-active-ink: #0f2017;
+	--btn: #ecfaef;
+	--btn-ink: #0f2017;
+	--btn-hover: #d1e7d6;
+	--card: #0f1f15;
+	--shadow: var(--shadow-dark);
+	--background: var(--bg);
+	--foreground: var(--ink);
+	/* Slightly stronger grid for dark theme so it shows up on dark backgrounds */
+	--grid-color: #0ea07214;
+}
+
+/* Prevent transitions during initial theme change to avoid FOUC */
+html.no-transition *,
+html.no-transition *::before,
+html.no-transition *::after {
+	transition: none !important;
+}
+
+/* Smooth transitions for theme-aware properties */
+:root {
+	--theme-transition: background-color 250ms ease, color 250ms ease,
+		box-shadow 250ms ease;
+}
+
+/* Base body styles */
+body {
+	/* Keep duplicate block safe: ensure background-image is present in both definitions */
+	background-color: var(--background);
+	background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+		linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+	background-size: var(--grid-size) var(--grid-size);
+	background-repeat: repeat;
+	background-attachment: fixed;
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: var(--theme-transition);
+}
+
+/* Typography styles using your theme */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	color: var(--foreground);
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.text-muted {
+	color: var(--muted);
+}
+
+/* Custom utility classes for your theme */
+.bg-card {
+	background-color: var(--card);
+	transition: var(--theme-transition);
+}
+
+.bg-pill {
+	background-color: var(--pill);
+	transition: var(--theme-transition);
+}
+
+.bg-pill-active {
+	background-color: var(--pill-active);
+	color: var(--pill-active-ink);
+	transition: var(--theme-transition);
+}
+
+.btn-primary {
+	background-color: var(--btn);
+	color: var(--btn-ink);
+	border-radius: var(--radius);
+	transition: background-color 180ms ease, color 180ms ease,
+		transform 120ms ease;
+}
+
+.btn-primary:hover {
+	background-color: var(--btn-hover);
+	transform: translateY(-1px);
+}
+
+.btn-primary:active {
+	transform: translateY(0);
+}
+
+.card {
+	background-color: var(--card);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow);
+	transition: var(--theme-transition);
+}
+
+/* NavBar active pill */
+.active-pill {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 6px;
+	background: var(--accent);
+	border-radius: 999px;
+	transform-origin: center;
+	transition: transform 220ms ease, width 220ms ease, left 220ms ease;
+}
+
+/* Overlay aside initial state handled by JS (gsap) */
+.overlay-aside {
+	transform: translateX(0);
+}
+
+.overlay-item {
+	opacity: 0;
+	transform: translateX(24px);
+}
+
+/* Magnetic link wrapper reset */
+.nav-link-wrap {
+	will-change: transform;
+}
+
+/* Code blocks */
+code,
+pre {
+	font-family: var(--font-mono);
+	font-feature-settings: "liga", "calt";
+}
+
+/* Smooth scrolling */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--subtle);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--muted);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--accent);
+}
+
+/* ============================================
+   ANIMATED BACKGROUND STYLES
+   ============================================ */
+
+/* Animated Background Container */
+.animated-background {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 0;
+}
+
+/* Animated background container
+	 - Fixed and centered so it remains in the middle of the viewport while scrolling
+	 - Constrained width/height so it looks consistent on wide screens
+	 - Use `contain: paint` and `will-change` hints for smoother GPU compositing */
+.animated-background {
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: min(1400px, 120vw);
+		height: min(900px, 120vh);
+		pointer-events: none;
+		overflow: visible;
+		z-index: 0;
+		display: block;
+		contain: paint;
+		will-change: transform, opacity;
+}
+
+/* Gradient Orbs */
+.gradient-orb {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(80px);
+	will-change: transform, opacity;
+	background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+}
+
+.gradient-orb {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(100px);
+	will-change: transform, opacity;
+	background: radial-gradient(circle, var(--accent) 0%, rgba(14,160,114,0.12) 30%, transparent 70%);
+	mix-blend-mode: screen;
+}
+
+.gradient-orb-1 {
+	/* larger, slightly offset towards top-left center */
+	left: 10%;
+	top: 8%;
+	width: 36rem;
+	height: 36rem;
+	opacity: 0.22;
+	filter: blur(120px);
+	animation: float 12s ease-in-out infinite;
+	animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+	/* secondary orb near bottom-right */
+	right: 8%;
+	bottom: 6%;
+	width: 28rem;
+	height: 28rem;
+	opacity: 0.16;
+	filter: blur(110px);
+	animation: float 14s ease-in-out infinite;
+	animation-delay: 2s;
+}
+
+.gradient-orb-1 {
+	top: 5rem;
+	left: 2.5rem;
+	width: 24rem;
+	height: 24rem;
+	opacity: 0.2;
+	animation: float 8s ease-in-out infinite;
+	animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+	bottom: 5rem;
+	right: 2.5rem;
+	width: 20rem;
+	height: 20rem;
+	opacity: 0.15;
+	animation: float 8s ease-in-out infinite;
+	animation-delay: 2s;
+}
+
+/* Floating Particles Container */
+.floating-particles {
+	position: absolute;
+	inset: 0;
+}
+
+.floating-particles {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.floating-particle {
+	position: absolute;
+	width: 0.6rem;
+	height: 0.6rem;
+	border-radius: 9999px;
+	background-color: var(--accent);
+	opacity: 0.08;
+	will-change: transform, opacity;
+	animation: float-random 10s ease-in-out infinite;
+	transform-origin: center;
+	box-shadow: 0 6px 18px rgba(14,160,114,0.06);
+}
+
+/* Individual Floating Particle */
+.floating-particle {
+	position: absolute;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 9999px;
+	background-color: var(--accent);
+	opacity: 0.1;
+	will-change: transform;
+	animation: float-random 12s ease-in-out infinite;
+}
+
+/* Particle Position Variants (can be applied via inline styles or utility classes) */
+.particle-1 {
+	left: 15%;
+	top: 20%;
+	animation-delay: 0s;
+	animation-duration: 8.5s;
+}
+
+.particle-1 {
+	left: 18%;
+	top: 20%;
+	animation-delay: 0s;
+	animation-duration: 9s;
+}
+
+.particle-2 {
+	left: 78%;
+	top: 14%;
+	animation-delay: 0.6s;
+	animation-duration: 10s;
+}
+
+.particle-3 {
+	left: 46%;
+	top: 68%;
+	animation-delay: 1.1s;
+	animation-duration: 11s;
+}
+
+.particle-4 {
+	left: 84%;
+	top: 52%;
+	animation-delay: 1.6s;
+	animation-duration: 9s;
+}
+
+.particle-5 {
+	left: 26%;
+	top: 86%;
+	animation-delay: 2.1s;
+	animation-duration: 10.2s;
+}
+
+.particle-6 {
+	left: 60%;
+	top: 36%;
+	animation-delay: 2.6s;
+	animation-duration: 11.6s;
+}
+
+/* subtle vignette and soft light overlay to increase perceived depth */
+.animated-background::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 1rem;
+	background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.12) 100%);
+	pointer-events: none;
+	mix-blend-mode: overlay;
+	opacity: 0.6;
+	z-index: 1;
+}
+
+.particle-2 {
+	left: 75%;
+	top: 15%;
+	animation-delay: 0.5s;
+	animation-duration: 9.2s;
+}
+
+.particle-3 {
+	left: 45%;
+	top: 70%;
+	animation-delay: 1s;
+	animation-duration: 10.1s;
+}
+
+.particle-4 {
+	left: 85%;
+	top: 50%;
+	animation-delay: 1.5s;
+	animation-duration: 8.8s;
+}
+
+.particle-5 {
+	left: 25%;
+	top: 85%;
+	animation-delay: 2s;
+	animation-duration: 9.5s;
+}
+
+.particle-6 {
+	left: 60%;
+	top: 35%;
+	animation-delay: 2.5s;
+	animation-duration: 10.8s;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+.animate-pulse {
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Float Animation - Smooth up and down with slight scale */
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-20px) scale(1.05);
+	}
+}
+
+/* Float Random - Multi-directional movement */
+@keyframes float-random {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+	33% {
+		transform: translate(30px, -30px);
+	}
+	66% {
+		transform: translate(-20px, 20px);
+	}
+}
+
+/* Fade Slide Animations */
+@keyframes fade-slide-down {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-slide-left {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Animation Utility Classes */
+.animate-float {
+	animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-random {
+	animation: float-random 12s ease-in-out infinite;
+}
+
+.animate-fade-slide-down {
+	animation: fade-slide-down 0.8s ease-out forwards;
+}
+
+.animate-fade-slide-up {
+	animation: fade-slide-up 0.6s ease-out forwards;
+}
+
+.animate-fade-slide-left {
+	animation: fade-slide-left 0.6s ease-out forwards;
+}
+
+/* Additional Animation Utilities */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes rotate-in {
+	from {
+		opacity: 0;
+		transform: rotate(-10deg) scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: rotate(0deg) scale(1);
+	}
+}
+
+.animate-fade-in {
+	animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+	animation: scale-in 0.6s ease-out forwards;
+}
+
+.animate-rotate-in {
+	animation: rotate-in 0.7s ease-out forwards;
+}
+
+/* Stagger Delay Utilities */
+.animate-delay-100 {
+	animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+	animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+	animation-delay: 300ms;
+}
+
+.animate-delay-500 {
+	animation-delay: 500ms;
+}
+
+.animate-delay-700 {
+	animation-delay: 700ms;
+}
+
+.animate-delay-1000 {
+	animation-delay: 1000ms;
+}
+
+/* Performance Optimization Hints */
+.will-animate {
+	will-change: transform, opacity;
+}
+
+.gpu-accelerated {
+	transform: translateZ(0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+
+/* Responsive Animation Controls */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* Dark Mode Optimizations for Animated Background */
+html[data-theme="dark"] .gradient-orb {
+	opacity: 0.25;
+	filter: blur(100px);
+}
+
+html[data-theme="dark"] .floating-particle {
+	opacity: 0.15;
+}
+
+/* Light Mode Optimizations */
+html[data-theme="light"] .gradient-orb {
+	opacity: 0.15;
+	filter: blur(80px);
+}
+
+html[data-theme="light"] .floating-particle {
+	opacity: 0.08;
+}
