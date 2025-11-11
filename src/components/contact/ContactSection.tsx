@@ -327,7 +327,7 @@ const ContactSection: React.FC = () => {
 												</>
 											)}
 										</span>
-										<div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+										<div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/20 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 									</Button>
 								</form>
 							</Card>

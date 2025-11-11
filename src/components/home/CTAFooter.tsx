@@ -222,7 +222,7 @@ const CTAFooter: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-green-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent to-green-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
               </Button>
             </div>
 

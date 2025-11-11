@@ -2,10 +2,10 @@
 
 import React, { useEffect } from "react";
 import Hero from "../components/home/Hero";
-import FeaturedWork from "../components/home/FeaturedWork";
-import Counters from "../components/home/Counters";
-import LatestArticles from "../components/home/LatestArticles";
-import CTAFooter from "../components/home/CTAFooter";
+// import FeaturedWork from "../components/home/FeaturedWork";
+// import Counters from "../components/home/Counters";
+// import LatestArticles from "../components/home/LatestArticles";
+// import CTAFooter from "../components/home/CTAFooter";
 import ScrollAnimations from "../components/ScrollAnimations";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -48,27 +48,27 @@ const Home = () => {
         <Hero />
 
         {/* Content Sections with Spacing */}
-        <div className="relative z-30 bg-bg">
+        {/* <div className="relative z-30 bg-bg"> */}
           {/* Featured Work */}
-          <div id="featured" className="reveal">
+          {/* <div id="featured" className="reveal">
             <FeaturedWork />
-          </div>
+          </div> */}
 
           {/* Stats Counter */}
-          <div className="reveal">
+          {/* <div className="reveal">
             <Counters />
-          </div>
+          </div> */}
 
           {/* Latest Articles */}
-          <div className="reveal">
+          {/* <div className="reveal">
             <LatestArticles />
-          </div>
+          </div> */}
 
           {/* CTA Footer */}
-          <div className="reveal">
+          {/* <div className="reveal">
             <CTAFooter />
           </div>
-        </div>
+        </div> */}
 
         <ScrollAnimations />
       </main>

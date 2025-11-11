@@ -25,7 +25,7 @@ export default function TechnologyGrid() {
               <div className="text-xs text-muted-foreground">{s.years ?? "-"} yrs</div>
             </div>
             <div className="h-2 bg-gray-200 rounded overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-green-400 to-blue-500" style={{ width: `${s.level}%` }} />
+              <div className="h-full bg-gradient-to-br from-green-400 to-blue-500" style={{ width: `${s.level}%` }} />
             </div>
             <div className="mt-2 text-xs text-muted-foreground">Projects: {s.projects?.join(", ")}</div>
           </div>

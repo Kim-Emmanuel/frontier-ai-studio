@@ -254,7 +254,7 @@ const Hero: React.FC = () => {
                       />
                     </svg>
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </Button>
               </div>
 
@@ -327,12 +327,12 @@ const Hero: React.FC = () => {
               style={{ willChange: "transform", transformStyle: "preserve-3d" }}
             >
               {/* Glow Effect Behind Card */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-accent/30 via-accent/20 to-accent/30 rounded-3xl blur-2xl opacity-60 animate-pulse-slow" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-accent/30 via-accent/20 to-accent/30 rounded-3xl blur-2xl opacity-60 animate-pulse-slow" />
 
               {/* Main Card */}
-              <div className="relative rounded-3xl bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-xl border-2 border-accent/20 shadow-2xl overflow-hidden group hover:border-accent/40 transition-all duration-500">
+              <div className="relative rounded-3xl bg-card/40 backdrop-blur-2xl border-2 border-accent/20 shadow-2xl overflow-hidden group hover:border-accent/40 transition-all duration-500">
                 {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
 
                 {/* 3D Canvas */}
                 <div className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
@@ -379,12 +379,12 @@ const Hero: React.FC = () => {
               </div>
 
               {/* Floating Metrics */}
-              <div className="absolute -right-8 top-1/4 bg-card/90 backdrop-blur-xl rounded-2xl p-4 border border-accent/30 shadow-xl animate-float-gentle hidden xl:block">
+              <div className="absolute -right-8 top-1/4 bg-card/40 backdrop-blur-2xl rounded-2xl p-4 border-2 border-accent/20 shadow-2xl animate-float-gentle hidden xl:block">
                 <div className="text-3xl font-bold hero-gradient-text">50M+</div>
                 <div className="text-xs text-muted">Predictions</div>
               </div>
 
-              <div className="absolute -left-8 bottom-1/4 bg-card/90 backdrop-blur-xl rounded-2xl p-4 border border-accent/30 shadow-xl animate-float-gentle hidden xl:block" style={{ animationDelay: "1s" }}>
+              <div className="absolute -left-8 bottom-1/4 bg-card/40 backdrop-blur-2xl rounded-2xl p-4 border-2 border-accent/20 shadow-2xl animate-float-gentle hidden xl:block" style={{ animationDelay: "1s" }}>
                 <div className="text-3xl font-bold hero-gradient-text">99.9%</div>
                 <div className="text-xs text-muted">Uptime</div>
               </div>

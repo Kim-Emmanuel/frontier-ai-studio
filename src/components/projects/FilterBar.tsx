@@ -85,7 +85,7 @@ const FilterBar: React.FC<Props> = ({ tags, active, onToggle }) => {
               <span 
                 className={`
                   absolute inset-0 
-                  bg-gradient-to-r from-accent/20 via-accent/10 to-transparent
+                  bg-gradient-to-br from-accent/20 via-accent/10 to-transparent
                   opacity-0 transition-opacity duration-300
                   ${isActive ? 'opacity-100' : 'group-hover:opacity-100'}
                 `}
