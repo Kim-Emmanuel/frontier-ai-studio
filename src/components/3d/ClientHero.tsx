@@ -3,7 +3,13 @@
 import React, { Suspense } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 
-const LazyHero = React.lazy(() => import('./HeroScene'));
+interface HeroSceneProps {
+  accent?: string;
+  theme?: "light" | "dark";
+  bg?: string;
+}
+
+const LazyHero = React.lazy<React.ComponentType<HeroSceneProps>>(() => import('./HeroScene'));
 
 const ClientHero: React.FC = () => {
   const { theme } = useTheme();

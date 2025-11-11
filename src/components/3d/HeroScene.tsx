@@ -70,9 +70,10 @@ const MaskModel: React.FC<{ path?: string }> = ({ path = '/3d/musk.glb' }) => {
   );
 };
 
-const SceneWrapper: React.FC<{ bg?: string; theme?: 'light' | 'dark' }> = ({ 
+const SceneWrapper: React.FC<{ bg?: string; theme?: 'light' | 'dark'; accent?: string }> = ({ 
   bg, 
-  theme = 'dark' 
+  theme = 'dark',
+  accent = '#0ea072',
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pointer = useRef({ x: 0, y: 0 });
@@ -137,7 +138,7 @@ const SceneWrapper: React.FC<{ bg?: string; theme?: 'light' | 'dark' }> = ({
         />
         
         {/* Accent light for rim lighting effect */}
-        <pointLight position={[0, 0, 5]} intensity={0.3} color="#0ea072" />
+        <pointLight position={[0, 0, 5]} intensity={0.3} color={accent} />
         
         <Suspense fallback={null}>
           <Environment preset="city" blur={0.8} />
@@ -159,10 +160,10 @@ const SceneWrapper: React.FC<{ bg?: string; theme?: 'light' | 'dark' }> = ({
   );
 };
 
-const ClientHero: React.FC<{ bg?: string; theme?: 'light' | 'dark' }> = ({ bg, theme }) => {
+const ClientHero: React.FC<{ bg?: string; theme?: 'light' | 'dark'; accent?: string }> = ({ bg, theme, accent }) => {
   return (
     <div className="w-full h-full">
-      <SceneWrapper bg={bg} theme={theme} />
+      <SceneWrapper bg={bg} theme={theme} accent={accent} />
     </div>
   );
 };
