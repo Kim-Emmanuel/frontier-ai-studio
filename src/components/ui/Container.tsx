@@ -6,29 +6,29 @@ interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
   padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   center?: boolean;
   as?: React.ElementType;
-  fluid?: boolean; // Disables max-width while keeping padding
-  bleed?: boolean; // Full-width background with constrained content
+  fluid?: boolean;
+  bleed?: boolean;
 }
 
 // Modern responsive max-widths aligned with your design system
 const sizes: Record<NonNullable<ContainerProps['size']>, string> = {
-  xs: 'max-w-screen-sm',      // ~640px - Forms, narrow content
-  sm: 'max-w-2xl',             // ~672px - Blog posts, articles
-  md: 'max-w-4xl',             // ~896px - Standard content
-  lg: 'max-w-6xl',             // ~1152px - Wide layouts
-  xl: 'max-w-7xl',             // ~1280px - Dashboard, portfolio (default)
-  '2xl': 'max-w-screen-2xl',   // ~1536px - Extra wide content
-  full: 'max-w-full',          // No max-width constraint
+  xs: 'max-w-screen-sm',
+  sm: 'max-w-2xl',
+  md: 'max-w-4xl',
+  lg: 'max-w-6xl',
+  xl: 'max-w-7xl',
+  '2xl': 'max-w-screen-2xl',
+  full: 'max-w-full',
 };
 
 // Progressive responsive padding system
 const paddings: Record<NonNullable<ContainerProps['padding']>, string> = {
   none: 'px-0',
-  xs: 'px-3 sm:px-4',                      // 12px mobile, 16px tablet+
-  sm: 'px-4 sm:px-6',                      // 16px mobile, 24px tablet+
-  md: 'px-6 sm:px-8 lg:px-12',             // 24px mobile, 32px tablet, 48px desktop
-  lg: 'px-8 sm:px-12 lg:px-16 xl:px-20',   // 32px - 80px progressive
-  xl: 'px-10 sm:px-16 lg:px-24 xl:px-32',  // 40px - 128px for hero sections
+  xs: 'px-3 sm:px-4',
+  sm: 'px-4 sm:px-6',
+  md: 'px-6 sm:px-8 lg:px-12',
+  lg: 'px-8 sm:px-12 lg:px-16 xl:px-20',
+  xl: 'px-10 sm:px-16 lg:px-24 xl:px-32',
 };
 
 /**
@@ -36,13 +36,6 @@ const paddings: Record<NonNullable<ContainerProps['padding']>, string> = {
  * 
  * A flexible, responsive container component that manages max-width,
  * padding, and centering for consistent page layouts.
- * 
- * @example
- * ```tsx
- * <Container size="lg" padding="md">
- *   <h1>Content here</h1>
- * </Container>
- * ```
  */
 const Container: React.FC<ContainerProps> = ({ 
   size = 'xl', 
@@ -62,25 +55,24 @@ const Container: React.FC<ContainerProps> = ({
   
   // Bleed mode: wrapper with full width background, inner content constrained
   if (bleed) {
-    return (
-      <Component
-        className={`w-full ${className}`}
-        {...rest}
-      >
-        <div className={`${baseClasses} ${sizeClass} ${paddingClass} ${centerClass}`}>
-          {children}
-        </div>
-      </Component>
+    return React.createElement(
+      Component,
+      { className: `w-full ${className}`, ...(rest as any) },
+      React.createElement(
+        'div',
+        { className: `${baseClasses} ${sizeClass} ${paddingClass} ${centerClass}` },
+        children
+      )
     );
   }
 
-  return (
-    <Component
-      className={`${baseClasses} ${sizeClass} ${paddingClass} ${centerClass} ${className}`.trim().replace(/\s+/g, ' ')}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return React.createElement(
+    Component,
+    { 
+      className: `${baseClasses} ${sizeClass} ${paddingClass} ${centerClass} ${className}`.trim().replace(/\s+/g, ' '),
+      ...(rest as any)
+    },
+    children
   );
 };
 
