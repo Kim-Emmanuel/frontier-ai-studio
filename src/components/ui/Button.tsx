@@ -7,9 +7,9 @@ type Variant = 'primary' | 'ghost' | 'outline';
 type PolymorphicButtonProps<E extends React.ElementType = 'button'> = {
   as?: E;
   variant?: Variant;
-  className?: string;
   children?: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'children' | 'variant' | 'className' | keyof React.PropsWithChildren>;
+  className?: string;
+} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'variant' | 'className' | 'children'>;
 
 const base =
   'inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius)] transition-transform active:scale-[0.99]';
@@ -27,14 +27,10 @@ const Button = <E extends React.ElementType = 'button'>({
   children,
   ...rest
 }: PolymorphicButtonProps<E>) => {
-  const Comp = as || ('button' as React.ElementType);
+  const Comp = as || 'button';
   const cls = `${base} ${variants[variant]} ${className}`;
 
-  return (
-    <Comp className={cls} {...rest}>
-      {children}
-    </Comp>
-  );
+  return React.createElement(Comp, { className: cls, ...rest }, children);
 };
 
 export default Button;
