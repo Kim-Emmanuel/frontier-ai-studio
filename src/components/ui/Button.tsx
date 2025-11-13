@@ -7,10 +7,9 @@ type Variant = 'primary' | 'ghost' | 'outline';
 type PolymorphicButtonProps<E extends React.ElementType = 'button'> = {
   as?: E;
   variant?: Variant;
-  className?: string; // ✅ explicitly type className
+  className?: string;
   children?: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'children' | 'variant' | 'className'>;
-// ^ also omit 'className' from rest to avoid type clash
+} & Omit<React.ComponentPropsWithoutRef<E>, 'as' | 'children' | 'variant' | 'className' | keyof React.PropsWithChildren>;
 
 const base =
   'inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius)] transition-transform active:scale-[0.99]';
