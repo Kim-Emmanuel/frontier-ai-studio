@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({
   return React.createElement(
     Component,
     { 
-      className: `card p-6 ${hoverClass} ${className}`,
+      className: `card ${hoverClass} ${className}`,
       ...rest 
     },
     children

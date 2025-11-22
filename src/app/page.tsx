@@ -43,7 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="font-sans min-h-screen bg-bg overflow-hidden">
+    <div className="font-sans min-h-screen bg-bg py-12 overflow-hidden">
       <main>
         <Hero />
 

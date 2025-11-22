@@ -140,7 +140,7 @@ const Hero: React.FC = () => {
             style={{ willChange: "transform" }}
           >
             {/* Status Badge */}
-            {/* <div
+            <div
               className={`inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-pill/80 backdrop-blur-xl border border-accent/30 transition-all duration-1000 ${
                 mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"
               }`}
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
               <span className="text-sm font-bold text-accent uppercase tracking-wider">
                 Pioneering AI Innovation Since 2020
               </span>
-            </div> */}
+            </div>
 
             {/* Main Headline */}
             <div className="space-y-4">

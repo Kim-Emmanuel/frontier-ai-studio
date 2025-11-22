@@ -48,7 +48,7 @@ const Container: React.FC<ContainerProps> = ({
   children, 
   ...rest 
 }) => {
-  const baseClasses = 'w-full';
+  const baseClasses = 'w-full container';
   const sizeClass = fluid ? 'max-w-none' : sizes[size];
   const paddingClass = paddings[padding];
   const centerClass = center ? 'mx-auto' : '';
